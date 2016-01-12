@@ -6,6 +6,15 @@ class NilPiece < Piece
     @icon = nil
   end
 
+  def valid_move?(new_pos)
+    false
+  end
+
+
+  def nil?
+    true
+  end
+
   def to_s
     "   "
   end
