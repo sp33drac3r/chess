@@ -35,6 +35,8 @@ class Pawn < Piece
                                            @board[[@pos[0] - 2, @pos[1]]].color.nil? &&
                                           !@moved
 
+    valid_pos
+
   end
 
   def black_moves
@@ -46,6 +48,7 @@ class Pawn < Piece
     valid_pos << [@pos[0] + 2, @pos[1]] if @board[[@pos[0] + 1, @pos[1]]].color.nil? &&
                                            @board[[@pos[0] + 2, @pos[1]]].color.nil? &&
                                           !@moved
+    valid_pos
   end
 
 

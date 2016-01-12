@@ -87,7 +87,7 @@ class Board
     blank_spaces = []
     4.times do |row|
       8.times do |col|
-        blank_spaces << NilPiece.new([row,col], nil, self)
+        blank_spaces << NilPiece.new([(row + 2),col], nil, self)
       end
     end
     blank_spaces

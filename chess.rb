@@ -6,7 +6,7 @@ class Chess
     @board.display.render
   end
 
-  def play
+  def turn
     result = nil
     until result
       @board.display.render
@@ -14,6 +14,17 @@ class Chess
     end
     result
   end
+
+  def play
+    while true
+      start_pos = nil
+      end_pos = nil
+      start_pos = turn unless start_pos
+      end_pos = turn unless end_pos
+      @board.move(start_pos, end_pos) if start_pos && end_pos
+    end
+  end
+
 end
 
 if __FILE__ == $PROGRAM_NAME

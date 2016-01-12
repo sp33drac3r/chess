@@ -16,7 +16,7 @@ class Piece
   end
 
   def die
-    board[@pos] = nil #add nil piece
+    @board[@pos] = nil #add nil piece
     @pos = nil
   end
 
