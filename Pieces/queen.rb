@@ -10,14 +10,8 @@ class Queen < Piece
   end
 
 
-  def valid_move?(new_pos)
-    super(new_pos)
-
-    (orthogonal_moves + diagonal_moves).any? do |el|
-      new_pos == el
-    end
-
+  def all_moves
+    diagonal_moves + orthogonal_moves
   end
-
   #add method to print all valid moves
 end

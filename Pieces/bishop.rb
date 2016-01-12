@@ -9,13 +9,9 @@ class Bishop < Piece
     (color == :white) ? (@icon = '♗') : (@icon = '♝')
   end
 
-
-  def valid_move?(new_pos)
-    super(new_pos)
-
-    diagonal_moves.any? do |el|
-      new_pos == el
-    end
+  def all_moves
+    diagonal_moves
   end
+
 
 end

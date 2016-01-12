@@ -26,6 +26,8 @@ class Display
   def colors_for(i, j)
     if [i,j] == @cursor_pos
       bg = :light_red
+   elsif @board.selected_piece_moves(@cursor_pos).include?([i,j])
+     bg = :yellow
     elsif (i + j).odd?
       bg = :black
     else

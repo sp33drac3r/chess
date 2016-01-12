@@ -19,7 +19,6 @@ class King < Piece
   def initialize(pos, color, board)
     super(pos, color, board)
     (color == :white) ? (@icon = '♔') : (@icon = '♚')
-    @moved = false
   end
 
 end

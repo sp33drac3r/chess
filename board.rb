@@ -11,6 +11,11 @@ class Board
   end
 
 
+  def selected_piece_moves(pos)
+    self[pos].all_moves
+  end
+
+
   def populate
     all_pieces = make_black_team + make_nil + make_white_team
     @grid.each_with_index do |row, i|
@@ -26,6 +31,7 @@ class Board
       self[end_pos] = self[start_pos]
       self[start_pos] = NilPiece.new(start_pos, nil, self)
       self[end_pos].pos = end_pos
+      self[end_pos].moved = true
     end
   end
 

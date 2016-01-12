@@ -10,6 +10,10 @@ class NilPiece < Piece
     false
   end
 
+  def all_moves
+    return []
+  end
+
 
   def nil?
     true
