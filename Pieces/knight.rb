@@ -17,7 +17,7 @@ class Knight < Piece
 
   def initialize(pos, color, board)
     super(pos, color, board)
-    (pos == :white) ? (@icon = '♘') : (@icon = '♞')
+    (color == :white) ? (@icon = '♘') : (@icon = '♞')
   end
 
 end

@@ -6,19 +6,17 @@ module Slide
     orthogonal_moves_north + orthogonal_moves_south
   end
 
-
-
-
-  def diagal_moves
+  def diagonal_moves
     diagonal_move(1,1) + diagonal_move(1,-1) +
     diagonal_move(-1,1) + diagonal_move(-1, -1)
   end
-  
+
   private
 
   def diagonal_move(x, y)
     diag_valid_move = []
-    0.upto(7) do |i|
+    1.upto(7) do |i|
+      break unless (pos[0] + (i * x)).between?(0,7) && (pos[1] + (i * y)).between?(0,7)
       diag_valid_move << [@pos[0] + (i * x), @pos[1] + (i * y)]
       if @board[[@pos[0] + (i * x), @pos[1] + (i * y)]].color == self.color
         diag_valid_move.pop

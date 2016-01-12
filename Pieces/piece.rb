@@ -17,6 +17,7 @@ class Piece
   end
 
   def valid_move?(new_pos)
+    return false unless new_pos[0].between?(0,7) && new_pos[1].between?(0,7)
     return false if @board[new_pos].color == @color
     # return false if move puts king in check
   end
