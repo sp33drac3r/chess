@@ -42,6 +42,9 @@ class Piece
     return false unless new_pos[0].between?(0,7) && new_pos[1].between?(0,7)
     return false if @board[new_pos].color == @color
     return false if !@board.new_game_state_check?(@pos, new_pos, @color)
+    possible_moves.any? do |el|
+      new_pos == el
+    end
   end
 
 

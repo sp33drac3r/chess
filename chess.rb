@@ -11,6 +11,7 @@ class Chess
     @black_player = HumanPlayer.new(:black, self)
     @white_player = HumanPlayer.new(:white, self)
     @counter = 1
+    @game_over = false
   end
 
   def turn
@@ -19,6 +20,7 @@ class Chess
       # print "White player's turn"
       # sleep(1)
       return @white_player.take_turn
+
     else
       @board.current_player = :black
       # print "black player's turn"
@@ -35,6 +37,11 @@ class Chess
       end_pos = turn unless end_pos
       if start_pos && end_pos
         @counter += 1 if @board.moved?(start_pos, end_pos)
+        @counter.odd? ? attack = :black : attack = :white
+        if @board.checkmate?(attack)
+          puts "You win!"
+          break
+        end
       end
     end
   end

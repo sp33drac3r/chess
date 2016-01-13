@@ -11,12 +11,6 @@ module Slide
     slide_moves(-1,1) + slide_moves(-1, -1)
   end
 
-  def valid_move?(new_pos)
-    super(new_pos)
-    possible_moves.any? do |el|
-      new_pos == el
-    end
-  end
 
 
 

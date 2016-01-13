@@ -86,6 +86,19 @@ class Board
     possible_checks.include?(king_pos)
   end
 
+  def checkmate?(attack_color)
+    8.times do |row|
+      8.times do |col|
+        if self[[row,col]].color == attack_color
+          p (self[[row,col]].all_moves)
+          return false if !(self[[row,col]].all_moves.empty?)
+
+        end
+      end
+    end
+    true
+  end
+
   def [] pos
     row,col = pos
     @grid[row][col]

@@ -7,13 +7,7 @@ class Pawn < Piece
     (color == :white) ? (@icon = '♙') : (@icon = '♟')
   end
 
-  def valid_move?(new_pos)
-    super(new_pos)
 
-    possible_moves.any? do |el|
-      new_pos == el
-    end
-  end
 
   def possible_moves
     if @color == :white
