@@ -26,7 +26,7 @@ class Display
   def colors_for(i, j)
     if [i,j] == @cursor_pos
       bg = :light_red
-   elsif @board.selected_piece_moves(@cursor_pos).include?([i,j])
+   elsif @board[@cursor_pos].all_moves.include?([i,j])
      bg = :yellow
     elsif (i + j).odd?
       bg = :black
@@ -38,8 +38,8 @@ class Display
 
   def render
     system("clear")
-    puts "Fill the grid!"
-    puts "Arrow keys, WASD, or vim to move, space or enter to confirm."
+    puts "It is #{@board.current_player.to_s}'s turn!"
+    puts "Arrow keys to move, space or enter to select position."
     build_grid.each { |row| puts row.join }
   end
 end

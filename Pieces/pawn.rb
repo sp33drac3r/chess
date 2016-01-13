@@ -10,13 +10,12 @@ class Pawn < Piece
   def valid_move?(new_pos)
     super(new_pos)
 
-    all_moves.any? do |el|
+    possible_moves.any? do |el|
       new_pos == el
     end
   end
 
-  def all_moves
-
+  def possible_moves
     if @color == :white
       white_moves
     elsif @color == :black

@@ -3,16 +3,25 @@ require_relative 'display.rb'
 
 class Board
   attr_reader :grid, :display
+  attr_accessor :current_player
 
   def initialize(start = true)
     @grid = Array.new(8) {Array.new(8)}
     @display = Display.new(self)
+    @current_player = :white
     populate if start
   end
 
 
-  def selected_piece_moves(pos)
-    self[pos].all_moves
+  def dup
+    new_board = Board.new(false)
+    8.times do |row|
+      8.times do |col|
+        new_board[[row, col]] = self[[row, col]].dup(new_board)
+      end
+    end
+
+    new_board
   end
 
 
@@ -26,13 +35,55 @@ class Board
   end
 
   def move(start_pos, end_pos)
-    if self[start_pos].valid_move?(end_pos)
-      self[end_pos].die
-      self[end_pos] = self[start_pos]
-      self[start_pos] = NilPiece.new(start_pos, nil, self)
-      self[end_pos].pos = end_pos
-      self[end_pos].moved = true
+    self[end_pos].die
+    self[end_pos] = self[start_pos]
+    self[start_pos] = NilPiece.new(start_pos, nil, self)
+    self[end_pos].pos = end_pos
+    self[end_pos].moved = true
+  end
+
+  def moved?(start_pos, end_pos)
+    if new_game_state_check?(start_pos, end_pos, @current_player) && self[start_pos].all_moves.include?(end_pos)
+      move(start_pos, end_pos)
+      return true
+    else
+      return false
     end
+  end
+
+  # def move_unless_check(start_pos, end_pos)
+  #   @current_player == :white ? alt_player = :black : alt_player = :white
+  #   potential_board = self.dup
+  #   potential_board.move(start_pos, end_pos)
+  #   unless potential_board.check?(alt_player)
+  #     self.move(start_pos, end_pos)
+  #     return true
+  #   end
+  #   return false
+  # end
+
+  def new_game_state_check?(start_pos, end_pos, color)
+    return false if self[start_pos].color != @current_player
+    color == :white ? alt_player = :black : alt_player = :white
+    potential_board = self.dup
+    potential_board.move(start_pos, end_pos)
+    !potential_board.check?(alt_player)
+  end
+
+
+  def check?(attack_color)
+    king_pos = []
+    possible_checks = []
+    8.times do |row|
+      8.times do |col|
+        if self[[row,col]].color == attack_color
+          possible_checks += self[[row,col]].possible_moves
+        elsif self[[row,col]].is_a?(King)
+          king_pos = [row,col]
+        end
+      end
+    end
+    possible_checks.include?(king_pos)
   end
 
   def [] pos

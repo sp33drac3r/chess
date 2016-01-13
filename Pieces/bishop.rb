@@ -9,7 +9,7 @@ class Bishop < Piece
     (color == :white) ? (@icon = '♗') : (@icon = '♝')
   end
 
-  def all_moves
+  def possible_moves
     diagonal_moves
   end
 

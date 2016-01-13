@@ -9,7 +9,7 @@ class Rook < Piece
     (color == :white) ? (@icon = '♖') : (@icon = '♜')
   end
 
-  def all_moves
+  def possible_moves
     orthogonal_moves
   end
 

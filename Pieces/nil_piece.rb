@@ -10,7 +10,7 @@ class NilPiece < Piece
     false
   end
 
-  def all_moves
+  def possible_moves
     return []
   end
 
